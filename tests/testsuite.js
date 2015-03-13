@@ -147,4 +147,4 @@ exports['The Testsuite'] = {
 
 		test.done();
 	}
-}
+};

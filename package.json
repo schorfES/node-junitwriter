@@ -4,7 +4,7 @@
   "description": "A junit reporter for node",
   "main": "lib/JunitWriter.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt validate test"
   },
   "repository": {
     "type": "git",

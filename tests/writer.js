@@ -12,7 +12,7 @@ exports['The Writer'] = {
 		var writer = new Writer();
 		test.equal(
 			writer.toString(),
-			'<?xml version="1.0" encoding="UTF-8"?>\n'+
+			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<testsuites/>'
 		);
 		test.done();
@@ -51,7 +51,7 @@ exports['The Writer'] = {
 
 						test.equal(
 							data,
-							'<?xml version="1.0" encoding="UTF-8"?>\n'+
+							'<?xml version="1.0" encoding="UTF-8"?>\n' +
 							'<testsuites/>',
 							'The output is not the expected one'
 						);
@@ -96,7 +96,7 @@ exports['The Writer'] = {
 
 					test.equal(
 						data,
-						'<?xml version="1.0" encoding="UTF-8"?>\n'+
+						'<?xml version="1.0" encoding="UTF-8"?>\n' +
 						'<testsuites/>',
 						'The output is not the expected one'
 					);
