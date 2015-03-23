@@ -194,5 +194,22 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should set hostname': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setHostname('foobar.baz');
+		test.equal(
+			suite.toString(),
+			'<testsuite hostname="foobar.baz"/>',
+			'The timestamp format is not the expeected one'
+		);
+
+		test.done();
 	}
 };
