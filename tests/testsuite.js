@@ -218,5 +218,29 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should set package': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setPackage('foo.bar.baz');
+		test.equal(
+			suite.toString(),
+			'<testsuite package="foo.bar.baz"/>',
+			'The given package is not correct'
+		);
+
+		suite.setPackage('baz.bar.foo');
+		test.equal(
+			suite.toString(),
+			'<testsuite package="baz.bar.foo"/>',
+			'The given package was not overwritten'
+		);
+
+		test.done();
 	}
 };
