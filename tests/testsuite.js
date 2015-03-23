@@ -146,5 +146,53 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should set timestamp': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite(),
+			date = new Date()
+		;
+
+		date.setUTCFullYear(2014);
+		date.setUTCMonth(0);
+		date.setUTCDate(21);
+		date.setUTCHours(16);
+		date.setUTCMinutes(17);
+		date.setUTCSeconds(18);
+		date.setUTCMilliseconds(19);
+
+		suite.setTimestamp(date);
+		test.equal(
+			suite.toString(),
+			'<testsuite timestamp="2014-01-21T16:17:18"/>',
+			'The timestamp format is not the expeected one'
+		);
+
+		test.done();
+	},
+
+	'should fail when set timestamp without a valid date instance': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		test.throws(
+			function() {suite.setTimestamp('2014-01-21T16:17:18');},
+			'Timestamp must be an instance of Date',
+			'The function didn\'t throw an error when passing a string'
+		);
+
+		test.throws(
+			function() {suite.setTimestamp(20140121);},
+			'Timestamp must be an instance of Date',
+			'The function didn\'t throw an error when passing a number'
+		);
+
+		test.done();
 	}
 };
