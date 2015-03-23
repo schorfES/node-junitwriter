@@ -207,7 +207,14 @@ exports['The Testsuite'] = {
 		test.equal(
 			suite.toString(),
 			'<testsuite hostname="foobar.baz"/>',
-			'The timestamp format is not the expeected one'
+			'The given hostname is not correct'
+		);
+
+		suite.setHostname('foo.baz.bar');
+		test.equal(
+			suite.toString(),
+			'<testsuite hostname="foo.baz.bar"/>',
+			'The given hostname was not overwritten'
 		);
 
 		test.done();
