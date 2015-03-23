@@ -163,5 +163,67 @@ exports['The Testsuites'] = {
 		);
 
 		test.done();
+	},
+
+	'should show ids in all created testsuites': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites()
+		;
+
+		suites.addTestsuite();
+		suites.addTestsuite();
+		suites.showIds();
+
+		test.equal(
+			suites.toString(),
+			'<testsuites><testsuite id="0"/><testsuite id="1"/></testsuites>',
+			'The testsuite nodes didn\'t contain the correct ID'
+		);
+
+		suites.addTestsuite();
+
+		test.equal(
+			suites.toString(),
+			'<testsuites><testsuite id="0"/><testsuite id="1"/><testsuite id="2"/></testsuites>',
+			'The the later added testsuite didn\'t contain an ID'
+		);
+
+		test.done();
+	},
+
+	'should hide ids in all created testsuites': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites()
+		;
+
+		suites.showIds();
+		suites.addTestsuite();
+		suites.addTestsuite();
+
+		test.equal(
+			suites.toString(),
+			'<testsuites><testsuite id="0"/><testsuite id="1"/></testsuites>',
+			'The testsuite nodes didn\'t contain the correct ID'
+		);
+
+		suites.hideIds();
+
+		test.equal(
+			suites.toString(),
+			'<testsuites><testsuite/><testsuite/></testsuites>',
+			'The testsuite nodes still contain an ID attribute'
+		);
+
+		suites.addTestsuite();
+
+		test.equal(
+			suites.toString(),
+			'<testsuites><testsuite/><testsuite/><testsuite/></testsuites>',
+			'The testsuite nodes are not free from ID attributes'
+		);
+
+		test.done();
 	}
 };

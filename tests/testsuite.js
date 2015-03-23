@@ -4,6 +4,46 @@ var
 ;
 
 exports['The Testsuite'] = {
+	'should throw an error when instantiated without passing options to the constructor': function(test) {
+		test.throws(
+			function() { new Testsuite(); },
+			'Pass options into this testsuite',
+			'The constructor didn\'t fire any error'
+		);
+
+		test.done();
+	},
+
+	'should throw an error when instantiated without passing a parent testsuites option to the constructor': function(test) {
+		test.throws(
+			function() { new Testsuite({}); },
+			'Pass a parent testsuites element into this testsuite',
+			'The constructor didn\'t fire any error'
+		);
+
+		test.done();
+	},
+
+	'should throw an error when instantiated with incorrect parent option': function(test) {
+		test.throws(
+			function() { new Testsuite({
+				parent: 'Testsuites'
+			}); },
+			'Pass a parent testsuites element into this testsuite',
+			'The constructor didn\'t fire any error when passing a string'
+		);
+
+		test.throws(
+			function() { new Testsuite({
+				parent: 1
+			}); },
+			'Pass a parent testsuites element into this testsuite',
+			'The constructor didn\'t fire any error when passing a number'
+		);
+
+		test.done();
+	},
+
 	'should increase disabled amount': function(test) {
 		var
 			writer = new Writer(),
@@ -239,6 +279,30 @@ exports['The Testsuite'] = {
 			suite.toString(),
 			'<testsuite package="baz.bar.foo"/>',
 			'The given package was not overwritten'
+		);
+
+		test.done();
+	},
+
+	'should toggle the attribute of the given ID': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.showId();
+		test.equal(
+			suite.toString(),
+			'<testsuite id="0"/>',
+			'The ID was not displayed'
+		);
+
+		suite.hideId();
+		test.equal(
+			suite.toString(),
+			'<testsuite/>',
+			'The ID was not removed correctly'
 		);
 
 		test.done();
