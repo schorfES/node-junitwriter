@@ -70,14 +70,9 @@ module.exports = function(grunt) {
 		'nodeunit'
 	]);
 
-	grunt.registerTask('docs', [
-		'concat'
-	]);
-
 	grunt.registerTask('default', [
 		'validate',
-		'test',
-		'docs'
+		'test'
 	]);
 
 };
