@@ -44,5 +44,20 @@ exports['The Node'] = {
 		);
 
 		test.done();
+	},
+
+	'should be removeable when possible': function(test) {
+		var
+			root = new Node('foo'),
+			child = new Node('bar', root)
+		;
+
+
+		test.throws(function() {root.destroy();});
+
+		child.destroy();
+		test.equals(root.toString(), '<foo/>', 'The node was not the expected one');
+
+		test.done();
 	}
 };
