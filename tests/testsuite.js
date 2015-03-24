@@ -306,5 +306,67 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should add properties': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.addProperty('foo', 123);
+		suite.addProperty('bar', 'baz');
+		test.equal(
+			suite.toString(),
+			'<testsuite><properties><property name="foo" value="123"/><property name="bar" value="baz"/></properties></testsuite>',
+			'The properties are missing'
+		);
+
+		test.done();
+	},
+
+	'should remove properties completely': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.addProperty('foo', 123);
+		suite.addProperty('bar', 'baz');
+		suite.removeProperty('foo');
+		test.equal(
+			suite.toString(),
+			'<testsuite><properties><property name="bar" value="baz"/></properties></testsuite>',
+			'The properties are not removed correctly'
+		);
+
+		suite.removeProperty('bar');
+		test.equal(
+			suite.toString(),
+			'<testsuite/>',
+			'The properties are not removed completely'
+		);
+
+		test.done();
+	},
+
+	'should update properties': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.addProperty('foo', 123);
+		suite.updateProperty('foo', 'bar');
+		test.equal(
+			suite.toString(),
+			'<testsuite><properties><property name="foo" value="bar"/></properties></testsuite>',
+			'The properties are not removed correctly'
+		);
+
+		test.done();
 	}
 };
