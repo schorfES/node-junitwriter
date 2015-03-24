@@ -19,5 +19,30 @@ exports['The Node'] = {
 		test.equals(root.toString(), '<foo><bar/></foo>', 'The node was not the expected one');
 		test.equals(child.toString(), '<bar/>', 'The node was not the expected one');
 		test.done();
+	},
+
+	'should throw an error when missing name': function(test) {
+		test.throws(
+			function() {new Node();},
+			'A node expects a name as string',
+			'The errow of a missing name param wasn\'t thrown'
+		);
+		test.done();
+	},
+
+	'should throw an error when name is not type of string': function(test) {
+		test.throws(
+			function() {new Node(true);},
+			'A node expects a name as string',
+			'The error of an incorrect type of the nodename wasn\'t thrown'
+		);
+
+		test.throws(
+			function() {new Node(123);},
+			'A node expects a name as string',
+			'The error of an incorrect type of the nodename wasn\'t thrown'
+		);
+
+		test.done();
 	}
 };
