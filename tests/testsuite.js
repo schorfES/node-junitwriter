@@ -284,6 +284,59 @@ exports['The Testsuite'] = {
 		test.done();
 	},
 
+	'should set skipped tag': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSkipped(true);
+		test.equal(
+			suite.toString(),
+			'<testsuite><skipped/></testsuite>',
+			'The testsuite has no correct skipped tag'
+		);
+
+		test.done();
+	},
+
+	'should not set skipped tag twice': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSkipped(true);
+		suite.setSkipped(true);
+		test.equal(
+			suite.toString(),
+			'<testsuite><skipped/></testsuite>',
+			'The testsuite has multiple skipped tags'
+		);
+
+		test.done();
+	},
+
+	'should remove skipped tag when set to false': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSkipped(true);
+		suite.setSkipped(false);
+		test.equal(
+			suite.toString(),
+			'<testsuite/>',
+			'The testsuite still contains a skipped tag'
+		);
+
+		test.done();
+	},
+
 	'should toggle the attribute of the given ID': function(test) {
 		var
 			writer = new Writer(),
