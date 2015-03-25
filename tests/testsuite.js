@@ -446,5 +446,30 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should add failures': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+
+		suite.addFailure('some message', 'some type');
+		test.equal(
+			suite.toString(),
+			'<testsuite><failure message="some message" type="some type"/></testsuite>',
+			'The failure is missing'
+		);
+
+		suite.addFailure('some other message', 'some other type');
+		test.equal(
+			suite.toString(),
+			'<testsuite><failure message="some message" type="some type"/><failure message="some other message" type="some other type"/></testsuite>',
+			'The other failure is missing'
+		);
+
+		test.done();
 	}
 };
