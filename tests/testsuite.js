@@ -421,5 +421,30 @@ exports['The Testsuite'] = {
 		);
 
 		test.done();
+	},
+
+	'should add errors': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+
+		suite.addError('some message', 'some type');
+		test.equal(
+			suite.toString(),
+			'<testsuite><error message="some message" type="some type"/></testsuite>',
+			'The error is missing'
+		);
+
+		suite.addError('some other message', 'some other type');
+		test.equal(
+			suite.toString(),
+			'<testsuite><error message="some message" type="some type"/><error message="some other message" type="some other type"/></testsuite>',
+			'The other error is missing'
+		);
+
+		test.done();
 	}
 };
