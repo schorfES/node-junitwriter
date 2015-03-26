@@ -150,15 +150,12 @@ exports['The Testsuites'] = {
 			testsuiteB = suites.addTestsuite()
 		;
 
-		testsuiteA.incTests();
-		testsuiteB.incTests(2);
-
 		test.ok(testsuiteA instanceof Testsuite);
 		test.ok(testsuiteB instanceof Testsuite);
 		test.notEqual(testsuiteA, testsuiteB);
 		test.equal(
 			suites.toString(),
-			'<testsuites tests="3"><testsuite tests="1"/><testsuite tests="2"/></testsuites>',
+			'<testsuites><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
 			'The testsuites are not correct added'
 		);
 
@@ -177,7 +174,7 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite id="0"/><testsuite id="1"/></testsuites>',
+			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/></testsuites>',
 			'The testsuite nodes didn\'t contain the correct ID'
 		);
 
@@ -185,7 +182,7 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite id="0"/><testsuite id="1"/><testsuite id="2"/></testsuites>',
+			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/><testsuite tests="0" id="2"/></testsuites>',
 			'The the later added testsuite didn\'t contain an ID'
 		);
 
@@ -204,7 +201,7 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite id="0"/><testsuite id="1"/></testsuites>',
+			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/></testsuites>',
 			'The testsuite nodes didn\'t contain the correct ID'
 		);
 
@@ -212,7 +209,7 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite/><testsuite/></testsuites>',
+			'<testsuites><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
 			'The testsuite nodes still contain an ID attribute'
 		);
 
@@ -220,7 +217,7 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite/><testsuite/><testsuite/></testsuites>',
+			'<testsuites><testsuite tests="0"/><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
 			'The testsuite nodes are not free from ID attributes'
 		);
 
@@ -230,14 +227,13 @@ exports['The Testsuites'] = {
 	'should set system-out': function(test) {
 		var
 			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suites = writer.getTestsuites()
 		;
 
-		suite.setSystemOut('some system out');
+		suites.setSystemOut('some system out');
 		test.equal(
-			suite.toString(),
-			'<testsuite><system-out>some system out</system-out></testsuite>',
+			suites.toString(),
+			'<testsuites><system-out>some system out</system-out></testsuites>',
 			'The system out is not displayed correctly'
 		);
 
@@ -247,16 +243,15 @@ exports['The Testsuites'] = {
 	'should update system-out': function(test) {
 		var
 			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suites = writer.getTestsuites()
 		;
 
-		suite.setSystemOut('some system out');
-		suite.setSystemOut('some another system out');
+		suites.setSystemOut('some system out');
+		suites.setSystemOut('some another system out');
 
 		test.equal(
-			suite.toString(),
-			'<testsuite><system-out>some another system out</system-out></testsuite>',
+			suites.toString(),
+			'<testsuites><system-out>some another system out</system-out></testsuites>',
 			'The system out is not displayed correctly'
 		);
 
@@ -266,14 +261,13 @@ exports['The Testsuites'] = {
 	'should set system-err': function(test) {
 		var
 			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suites = writer.getTestsuites()
 		;
 
-		suite.setSystemError('some system error');
+		suites.setSystemError('some system error');
 		test.equal(
-			suite.toString(),
-			'<testsuite><system-err>some system error</system-err></testsuite>',
+			suites.toString(),
+			'<testsuites><system-err>some system error</system-err></testsuites>',
 			'The system error is not displayed correctly'
 		);
 
@@ -283,16 +277,15 @@ exports['The Testsuites'] = {
 	'should update system-err': function(test) {
 		var
 			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suites = writer.getTestsuites()
 		;
 
-		suite.setSystemError('some system error');
-		suite.setSystemError('some another system error');
+		suites.setSystemError('some system error');
+		suites.setSystemError('some another system error');
 
 		test.equal(
-			suite.toString(),
-			'<testsuite><system-err>some another system error</system-err></testsuite>',
+			suites.toString(),
+			'<testsuites><system-err>some another system error</system-err></testsuites>',
 			'The system error is not displayed correctly'
 		);
 
