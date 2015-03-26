@@ -5,6 +5,7 @@ var
 
 exports['The Writer'] = {
 	'should create an instance': function(test) {
+		var writer = new Writer();
 		test.done();
 	},
 
@@ -14,6 +15,17 @@ exports['The Writer'] = {
 			writer.toString(),
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<testsuites/>'
+		);
+		test.done();
+	},
+
+	'should add a testsuite': function(test) {
+		var writer = new Writer();
+		writer.addTestsuite('suitename');
+		test.equal(
+			writer.toString(),
+			'<?xml version="1.0" encoding="UTF-8"?>\n' +
+			'<testsuites><testsuite name="suitename" tests="0"/></testsuites>'
 		);
 		test.done();
 	},
