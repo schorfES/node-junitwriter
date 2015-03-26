@@ -1,5 +1,5 @@
 {
-  "name": "node-junitwriter",
+  "name": "junitwriter",
   "version": "0.1.0",
   "description": "A junit reporter for node",
   "main": "lib/JunitWriter.js",
@@ -12,8 +12,11 @@
   },
   "keywords": [
     "junit",
+    "reporter",
     "filewriter",
-    "tests"
+    "tests",
+    "jenkins",
+    "xml"
   ],
   "author": "Norman Rusch",
   "license": "MIT",
