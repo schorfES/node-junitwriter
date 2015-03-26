@@ -29,7 +29,7 @@ function `getTestsuites()`.
 
 Retuns the testsuites root node.
 
-#### addTestsuite()
+#### addTestsuite(name)
 
 Adds and retuns a testsuite node inside the testsuites root node.
 
