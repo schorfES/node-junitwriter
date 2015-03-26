@@ -5,10 +5,10 @@ var
 ;
 
 exports['The Testsuite'] = {
-	'should throw an error when instantiated without passing options to the constructor': function(test) {
+	'should throw an error when instantiated without passing a name to the constructor': function(test) {
 		test.throws(
 			function() { new Testsuite(); },
-			'Pass options into this testsuite',
+			'A testsuite requires a name',
 			'The constructor didn\'t fire any error'
 		);
 
@@ -17,29 +17,25 @@ exports['The Testsuite'] = {
 
 	'should throw an error when instantiated without passing a parent testsuites option to the constructor': function(test) {
 		test.throws(
-			function() { new Testsuite({}); },
-			'Pass a parent testsuites element into this testsuite',
+			function() { new Testsuite('some name'); },
+			'A testsuite requires a parent node',
 			'The constructor didn\'t fire any error'
 		);
 
 		test.done();
 	},
 
-	'should throw an error when instantiated with incorrect parent option': function(test) {
-		test.throws(
-			function() { new Testsuite({
-				parent: 'Testsuites'
-			}); },
-			'Pass a parent testsuites element into this testsuite',
-			'The constructor didn\'t fire any error when passing a string'
-		);
+	'should contain a name and tests amount initially': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename')
+		;
 
-		test.throws(
-			function() { new Testsuite({
-				parent: 1
-			}); },
-			'Pass a parent testsuites element into this testsuite',
-			'The constructor didn\'t fire any error when passing a number'
+		test.equal(
+			suite.toString(),
+			'<testsuite name="suitename" tests="0"/>',
+			'The testcase not correct formatted'
 		);
 
 		test.done();
@@ -49,14 +45,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite(),
+			suite = suites.addTestsuite('suitename'),
 			caseA = suite.addTestcase('testA', 'TestA'),
 			caseB = suite.addTestcase('testB', 'TestB')
 		;
 
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="2"><testcase name="testA" classname="TestA"/><testcase name="testB" classname="TestB"/></testsuite>',
+			'<testsuite name="suitename" tests="2"><testcase name="testA" classname="TestA"/><testcase name="testB" classname="TestB"/></testsuite>',
 			'The testcases are not added'
 		);
 		test.ok(
@@ -80,20 +76,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.incDisabled();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" disabled="1"/>',
+			'<testsuite name="suitename" tests="0" disabled="1"/>',
 			'The initial disabled amount is not correct'
 		);
 
 		suite.incDisabled(2);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" disabled="3"/>',
+			'<testsuite name="suitename" tests="0" disabled="3"/>',
 			'The increased disabled amount is not correct'
 		);
 
@@ -104,20 +100,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.incErrors();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" errors="1"/>',
+			'<testsuite name="suitename" tests="0" errors="1"/>',
 			'The initial errors amount is not correct'
 		);
 
 		suite.incErrors(2);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" errors="3"/>',
+			'<testsuite name="suitename" tests="0" errors="3"/>',
 			'The increased errors amount is not correct'
 		);
 
@@ -128,20 +124,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.incFailures();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" failures="1"/>',
+			'<testsuite name="suitename" tests="0" failures="1"/>',
 			'The initial failures amount is not correct'
 		);
 
 		suite.incFailures(2);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" failures="3"/>',
+			'<testsuite name="suitename" tests="0" failures="3"/>',
 			'The increased failures amount is not correct'
 		);
 
@@ -152,20 +148,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.incTests();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="1"/>',
+			'<testsuite name="suitename" tests="1"/>',
 			'The initial tests amount is not correct'
 		);
 
 		suite.incTests(2);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="3"/>',
+			'<testsuite name="suitename" tests="3"/>',
 			'The increased tests amount is not correct'
 		);
 
@@ -176,20 +172,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setTime(5);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" time="5"/>',
+			'<testsuite name="suitename" tests="0" time="5"/>',
 			'The given time is not correct'
 		);
 
 		suite.setTime(200);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" time="200"/>',
+			'<testsuite name="suitename" tests="0" time="200"/>',
 			'The given time was not overwritten'
 		);
 
@@ -200,21 +196,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setName('foo');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" name="foo"/>',
+			'<testsuite name="foo" tests="0"/>',
 			'The given name is not correct'
-		);
-
-		suite.setName('foobarbaz');
-		test.equal(
-			suite.toString(),
-			'<testsuite tests="0" name="foobarbaz"/>',
-			'The given name was not overwritten'
 		);
 
 		test.done();
@@ -224,7 +213,7 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite(),
+			suite = suites.addTestsuite('suitename'),
 			date = new Date()
 		;
 
@@ -239,7 +228,7 @@ exports['The Testsuite'] = {
 		suite.setTimestamp(date);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" timestamp="2014-01-21T16:17:18"/>',
+			'<testsuite name="suitename" tests="0" timestamp="2014-01-21T16:17:18"/>',
 			'The timestamp format is not the expeected one'
 		);
 
@@ -250,7 +239,7 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		test.throws(
@@ -272,20 +261,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setHostname('foobar.baz');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" hostname="foobar.baz"/>',
+			'<testsuite name="suitename" tests="0" hostname="foobar.baz"/>',
 			'The given hostname is not correct'
 		);
 
 		suite.setHostname('foo.baz.bar');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" hostname="foo.baz.bar"/>',
+			'<testsuite name="suitename" tests="0" hostname="foo.baz.bar"/>',
 			'The given hostname was not overwritten'
 		);
 
@@ -296,20 +285,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setPackage('foo.bar.baz');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" package="foo.bar.baz"/>',
+			'<testsuite name="suitename" tests="0" package="foo.bar.baz"/>',
 			'The given package is not correct'
 		);
 
 		suite.setPackage('baz.bar.foo');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" package="baz.bar.foo"/>',
+			'<testsuite name="suitename" tests="0" package="baz.bar.foo"/>',
 			'The given package was not overwritten'
 		);
 
@@ -320,13 +309,13 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSkipped(true);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><skipped/></testsuite>',
+			'<testsuite name="suitename" tests="0"><skipped/></testsuite>',
 			'The testsuite has no correct skipped tag'
 		);
 
@@ -337,14 +326,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSkipped(true);
 		suite.setSkipped(true);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><skipped/></testsuite>',
+			'<testsuite name="suitename" tests="0"><skipped/></testsuite>',
 			'The testsuite has multiple skipped tags'
 		);
 
@@ -355,14 +344,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSkipped(true);
 		suite.setSkipped(false);
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"/>',
+			'<testsuite name="suitename" tests="0"/>',
 			'The testsuite still contains a skipped tag'
 		);
 
@@ -373,20 +362,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.showId();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0" id="0"/>',
+			'<testsuite name="suitename" tests="0" id="0"/>',
 			'The ID was not displayed'
 		);
 
 		suite.hideId();
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"/>',
+			'<testsuite name="suitename" tests="0"/>',
 			'The ID was not removed correctly'
 		);
 
@@ -397,14 +386,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.addProperty('foo', 123);
 		suite.addProperty('bar', 'baz');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><properties><property name="foo" value="123"/><property name="bar" value="baz"/></properties></testsuite>',
+			'<testsuite name="suitename" tests="0"><properties><property name="foo" value="123"/><property name="bar" value="baz"/></properties></testsuite>',
 			'The properties are missing'
 		);
 
@@ -415,7 +404,7 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.addProperty('foo', 123);
@@ -423,14 +412,14 @@ exports['The Testsuite'] = {
 		suite.removeProperty('foo');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><properties><property name="bar" value="baz"/></properties></testsuite>',
+			'<testsuite name="suitename" tests="0"><properties><property name="bar" value="baz"/></properties></testsuite>',
 			'The properties are not removed correctly'
 		);
 
 		suite.removeProperty('bar');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"/>',
+			'<testsuite name="suitename" tests="0"/>',
 			'The properties are not removed completely'
 		);
 
@@ -441,14 +430,14 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.addProperty('foo', 123);
 		suite.updateProperty('foo', 'bar');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><properties><property name="foo" value="bar"/></properties></testsuite>',
+			'<testsuite name="suitename" tests="0"><properties><property name="foo" value="bar"/></properties></testsuite>',
 			'The properties are not removed correctly'
 		);
 
@@ -459,20 +448,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.addError('some message', 'some type');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><error message="some message" type="some type"/></testsuite>',
+			'<testsuite name="suitename" tests="0"><error message="some message" type="some type"/></testsuite>',
 			'The error is missing'
 		);
 
 		suite.addError('some other message', 'some other type');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><error message="some message" type="some type"/><error message="some other message" type="some other type"/></testsuite>',
+			'<testsuite name="suitename" tests="0"><error message="some message" type="some type"/><error message="some other message" type="some other type"/></testsuite>',
 			'The other error is missing'
 		);
 
@@ -483,20 +472,20 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.addFailure('some message', 'some type');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><failure message="some message" type="some type"/></testsuite>',
+			'<testsuite name="suitename" tests="0"><failure message="some message" type="some type"/></testsuite>',
 			'The failure is missing'
 		);
 
 		suite.addFailure('some other message', 'some other type');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><failure message="some message" type="some type"/><failure message="some other message" type="some other type"/></testsuite>',
+			'<testsuite name="suitename" tests="0"><failure message="some message" type="some type"/><failure message="some other message" type="some other type"/></testsuite>',
 			'The other failure is missing'
 		);
 
@@ -507,13 +496,13 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSystemOut('some system out');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><system-out>some system out</system-out></testsuite>',
+			'<testsuite name="suitename" tests="0"><system-out>some system out</system-out></testsuite>',
 			'The system out is not displayed correctly'
 		);
 
@@ -524,7 +513,7 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSystemOut('some system out');
@@ -532,7 +521,7 @@ exports['The Testsuite'] = {
 
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><system-out>some another system out</system-out></testsuite>',
+			'<testsuite name="suitename" tests="0"><system-out>some another system out</system-out></testsuite>',
 			'The system out is not displayed correctly'
 		);
 
@@ -543,13 +532,13 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSystemError('some system error');
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><system-err>some system error</system-err></testsuite>',
+			'<testsuite name="suitename" tests="0"><system-err>some system error</system-err></testsuite>',
 			'The system error is not displayed correctly'
 		);
 
@@ -560,7 +549,7 @@ exports['The Testsuite'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite()
+			suite = suites.addTestsuite('suitename')
 		;
 
 		suite.setSystemError('some system error');
@@ -568,7 +557,7 @@ exports['The Testsuite'] = {
 
 		test.equal(
 			suite.toString(),
-			'<testsuite tests="0"><system-err>some another system error</system-err></testsuite>',
+			'<testsuite name="suitename" tests="0"><system-err>some another system error</system-err></testsuite>',
 			'The system error is not displayed correctly'
 		);
 

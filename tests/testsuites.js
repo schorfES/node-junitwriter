@@ -146,8 +146,8 @@ exports['The Testsuites'] = {
 		var
 			writer = new Writer(),
 			suites = writer.getTestsuites(),
-			testsuiteA = suites.addTestsuite(),
-			testsuiteB = suites.addTestsuite()
+			testsuiteA = suites.addTestsuite('suitenameA'),
+			testsuiteB = suites.addTestsuite('suitenameB')
 		;
 
 		test.ok(testsuiteA instanceof Testsuite);
@@ -155,7 +155,7 @@ exports['The Testsuites'] = {
 		test.notEqual(testsuiteA, testsuiteB);
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0"/><testsuite name="suitenameB" tests="0"/></testsuites>',
 			'The testsuites are not correct added'
 		);
 
@@ -168,21 +168,21 @@ exports['The Testsuites'] = {
 			suites = writer.getTestsuites()
 		;
 
-		suites.addTestsuite();
-		suites.addTestsuite();
+		suites.addTestsuite('suitenameA');
+		suites.addTestsuite('suitenameB');
 		suites.showIds();
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0" id="0"/><testsuite name="suitenameB" tests="0" id="1"/></testsuites>',
 			'The testsuite nodes didn\'t contain the correct ID'
 		);
 
-		suites.addTestsuite();
+		suites.addTestsuite('suitenameC');
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/><testsuite tests="0" id="2"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0" id="0"/><testsuite name="suitenameB" tests="0" id="1"/><testsuite name="suitenameC" tests="0" id="2"/></testsuites>',
 			'The the later added testsuite didn\'t contain an ID'
 		);
 
@@ -196,12 +196,12 @@ exports['The Testsuites'] = {
 		;
 
 		suites.showIds();
-		suites.addTestsuite();
-		suites.addTestsuite();
+		suites.addTestsuite('suitenameA');
+		suites.addTestsuite('suitenameB');
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0" id="0"/><testsuite tests="0" id="1"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0" id="0"/><testsuite name="suitenameB" tests="0" id="1"/></testsuites>',
 			'The testsuite nodes didn\'t contain the correct ID'
 		);
 
@@ -209,15 +209,15 @@ exports['The Testsuites'] = {
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0"/><testsuite name="suitenameB" tests="0"/></testsuites>',
 			'The testsuite nodes still contain an ID attribute'
 		);
 
-		suites.addTestsuite();
+		suites.addTestsuite('suitenameC');
 
 		test.equal(
 			suites.toString(),
-			'<testsuites><testsuite tests="0"/><testsuite tests="0"/><testsuite tests="0"/></testsuites>',
+			'<testsuites><testsuite name="suitenameA" tests="0"/><testsuite name="suitenameB" tests="0"/><testsuite name="suitenameC" tests="0"/></testsuites>',
 			'The testsuite nodes are not free from ID attributes'
 		);
 

@@ -31,7 +31,7 @@ This function saves the content of the report to a file at the given
 
 ### Testsuites
 
-#### addTestsuite()
+#### addTestsuite(name)
 
 Adds and retuns a testsuite node inside the testsuites root node.
 
