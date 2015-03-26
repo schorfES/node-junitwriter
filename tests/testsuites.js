@@ -225,5 +225,77 @@ exports['The Testsuites'] = {
 		);
 
 		test.done();
+	},
+
+	'should set system-out': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSystemOut('some system out');
+		test.equal(
+			suite.toString(),
+			'<testsuite><system-out>some system out</system-out></testsuite>',
+			'The system out is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should update system-out': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSystemOut('some system out');
+		suite.setSystemOut('some another system out');
+
+		test.equal(
+			suite.toString(),
+			'<testsuite><system-out>some another system out</system-out></testsuite>',
+			'The system out is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should set system-err': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSystemError('some system error');
+		test.equal(
+			suite.toString(),
+			'<testsuite><system-err>some system error</system-err></testsuite>',
+			'The system error is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should update system-err': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite()
+		;
+
+		suite.setSystemError('some system error');
+		suite.setSystemError('some another system error');
+
+		test.equal(
+			suite.toString(),
+			'<testsuite><system-err>some another system error</system-err></testsuite>',
+			'The system error is not displayed correctly'
+		);
+
+		test.done();
 	}
 };
