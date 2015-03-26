@@ -1,6 +1,7 @@
 var
 	Writer = require(process.cwd() + '/lib/Writer'),
-	Testsuite = require(process.cwd() + '/lib/Testsuite')
+	Testsuite = require(process.cwd() + '/lib/Testsuite'),
+	Testcase = require(process.cwd() + '/lib/Testcase')
 ;
 
 exports['The Testsuite'] = {
@@ -39,6 +40,37 @@ exports['The Testsuite'] = {
 			}); },
 			'Pass a parent testsuites element into this testsuite',
 			'The constructor didn\'t fire any error when passing a number'
+		);
+
+		test.done();
+	},
+
+	'should add testcases': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite(),
+			caseA = suite.addTestcase('testA', 'TestA'),
+			caseB = suite.addTestcase('testB', 'TestB')
+		;
+
+		test.equal(
+			suite.toString(),
+			'<testsuite><testcase name="testA" classname="TestA"/><testcase name="testB" classname="TestB"/></testsuite>',
+			'The testcases are not added'
+		);
+		test.ok(
+			caseA instanceof Testcase,
+			'The returned case is not an instance of Testcase'
+		);
+		test.ok(
+			caseB instanceof Testcase,
+			'The returned case is not an instance of Testcase'
+		);
+		test.notEqual(
+			caseA,
+			caseB,
+			'The two testcases are the same instance'
 		);
 
 		test.done();

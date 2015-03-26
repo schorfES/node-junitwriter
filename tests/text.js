@@ -26,6 +26,28 @@ exports['The Text'] = {
 		test.done();
 	},
 
+	'should fail when creating without text': function(test) {
+		test.throws(
+			function() { new Text('text', null); },
+			'Pass a text to the text node',
+			'The text didn\'t throw an error when not passing a text'
+		);
+
+		test.throws(
+			function() { new Text('text', null, 1); },
+			'Pass a text to the text node',
+			'The text didn\'t throw an error when passing an incorrect type of text'
+		);
+
+		test.throws(
+			function() { new Text('text', null, true); },
+			'Pass a text to the text node',
+			'The text didn\'t throw an error when passing an incorrect type of text'
+		);
+
+		test.done();
+	},
+
 	'should append the text': function(test) {
 		var text = new Text('text', null, 'foo bar');
 

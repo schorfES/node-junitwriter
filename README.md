@@ -6,6 +6,8 @@ A junit reporter for node.
 
 ## Methods
 
+<strong style="color:red">The documentation is work in progress</strong>
+
 ### Writer
 
 #### new Writer()
@@ -57,6 +59,8 @@ Adds and retuns a testsuite node inside the testsuites root node.
 
 Testsuite can appear multiple times as a child element of testsuites.
 
+#### addTestcase(name, classname)
+
 #### incDisabled(amount)
 
 #### incErrors(amount)
@@ -96,6 +100,16 @@ Testsuite can appear multiple times as a child element of testsuites.
 #### addError(message, type)
 
 #### addFailure(message, type)
+
+### Testcase
+
+#### setName(name)
+
+#### setClassname(classname)
+
+#### setAssertions(assertions)
+
+#### setTime(seconds)
 
 ## License
 
