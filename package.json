@@ -1,6 +1,6 @@
 {
   "name": "junitwriter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A junit reporter for node",
   "main": "index.js",
   "scripts": {
