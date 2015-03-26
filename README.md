@@ -4,6 +4,15 @@ A junit reporter for node.
 
 [![Travis Status](https://travis-ci.org/schorfES/node-junitwriter.png?branch=master)](https://travis-ci.org/schorfES/node-junitwriter)
 
+## Installation
+
+This package is available on [npm](https://www.npmjs.com/package/junitwriter/)
+as: `lintspaces`
+
+``` sh
+	npm install junitwriter
+```
+
 ## Methods
 
 <strong style="color:red">The documentation is work in progress</strong>
