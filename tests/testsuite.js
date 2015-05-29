@@ -444,54 +444,6 @@ exports['The Testsuite'] = {
 		test.done();
 	},
 
-	'should add errors': function(test) {
-		var
-			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite('suitename')
-		;
-
-		suite.addError('some message', 'some type');
-		test.equal(
-			suite.toString(),
-			'<testsuite name="suitename" tests="0"><error message="some message" type="some type"/></testsuite>',
-			'The error is missing'
-		);
-
-		suite.addError('some other message', 'some other type');
-		test.equal(
-			suite.toString(),
-			'<testsuite name="suitename" tests="0"><error message="some message" type="some type"/><error message="some other message" type="some other type"/></testsuite>',
-			'The other error is missing'
-		);
-
-		test.done();
-	},
-
-	'should add failures': function(test) {
-		var
-			writer = new Writer(),
-			suites = writer.getTestsuites(),
-			suite = suites.addTestsuite('suitename')
-		;
-
-		suite.addFailure('some message', 'some type');
-		test.equal(
-			suite.toString(),
-			'<testsuite name="suitename" tests="0"><failure message="some message" type="some type"/></testsuite>',
-			'The failure is missing'
-		);
-
-		suite.addFailure('some other message', 'some other type');
-		test.equal(
-			suite.toString(),
-			'<testsuite name="suitename" tests="0"><failure message="some message" type="some type"/><failure message="some other message" type="some other type"/></testsuite>',
-			'The other failure is missing'
-		);
-
-		test.done();
-	},
-
 	'should set system-out': function(test) {
 		var
 			writer = new Writer(),

@@ -1,5 +1,6 @@
 var
 	Node = require(process.cwd() + '/lib/Node'),
+	Writer = require(process.cwd() + '/lib/Writer'),
 	Testcase = require(process.cwd() + '/lib/Testcase')
 ;
 
@@ -149,6 +150,132 @@ exports['The Testcase'] = {
 			function() {testcase.setTime(true);},
 			'Time must be type of number (in seconds)',
 			'The testcase didn\'t throw an error when passing an incorrect type of time'
+		);
+
+		test.done();
+	},
+
+	'should add errors': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.addError('some message', 'some type');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><error message="some message" type="some type"/></testcase>',
+			'The error is missing'
+		);
+
+		testcase.addError('some other message', 'some other type');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><error message="some message" type="some type"/><error message="some other message" type="some other type"/></testcase>',
+			'The other error is missing'
+		);
+
+		test.done();
+	},
+
+	'should add failures': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.addFailure('some message', 'some type');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><failure message="some message" type="some type"/></testcase>',
+			'The failure is missing'
+		);
+
+		testcase.addFailure('some other message', 'some other type');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><failure message="some message" type="some type"/><failure message="some other message" type="some other type"/></testcase>',
+			'The other failure is missing'
+		);
+
+		test.done();
+	},
+
+	'should set system-out': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.setSystemOut('some system out');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><system-out>some system out</system-out></testcase>',
+			'The system out is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should update system-out': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.setSystemOut('some system out');
+		testcase.setSystemOut('some another system out');
+
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><system-out>some another system out</system-out></testcase>',
+			'The system out is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should set system-err': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.setSystemError('some system error');
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><system-err>some system error</system-err></testcase>',
+			'The system error is not displayed correctly'
+		);
+
+		test.done();
+	},
+
+	'should update system-err': function(test) {
+		var
+			writer = new Writer(),
+			suites = writer.getTestsuites(),
+			suite = suites.addTestsuite('suitename'),
+			testcase = suite.addTestcase('testname', 'class.name')
+		;
+
+		testcase.setSystemError('some system error');
+		testcase.setSystemError('some another system error');
+
+		test.equal(
+			testcase.toString(),
+			'<testcase name="testname" classname="class.name"><system-err>some another system error</system-err></testcase>',
+			'The system error is not displayed correctly'
 		);
 
 		test.done();
