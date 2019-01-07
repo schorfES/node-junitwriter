@@ -22,6 +22,12 @@
     "xml"
   ],
   "author": "Norman Rusch",
+  "contributors": [
+    {
+      "name": "Nate Spector",
+      "url": "https://github.com/nspector"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "dateformat": "3.0.3",
