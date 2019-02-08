@@ -1,6 +1,6 @@
 {
   "name": "junitwriter",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A junit reporter for node",
   "main": "index.js",
   "engines": {
@@ -36,10 +36,10 @@
     "xmlbuilder": "^10.1.1"
   },
   "devDependencies": {
-    "grunt": "1.0.3",
-    "grunt-contrib-jshint": "2.0.0",
-    "grunt-contrib-nodeunit": "2.0.0",
-    "grunt-jscs": "3.0.1",
-    "grunt-lintspaces": "0.8.4"
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-nodeunit": "^2.0.0",
+    "grunt-jscs": "^3.0.1",
+    "grunt-lintspaces": "^0.8.4"
   }
 }
