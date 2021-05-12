@@ -31,7 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "dateformat": "^3.0.3",
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "mkdirp": "^0.5.1",
     "xmlbuilder": "^10.1.1"
   },
