@@ -13,112 +13,182 @@ as: `junitwriter`
 	npm install junitwriter
 ```
 
-## Methods
+## API Documentation
 
-<strong style="color:red">The documentation is work in progress</strong>
+### `Writer`
 
-### Writer
-
-#### new Writer()
+#### `new Writer()`
 
 Creates an instance of the junit reporter. When creating an instance a
-testsuites rootnode is created internally which can be accessed through the
+`Testsuites` root node is created internally which can be accessed through the
 function `getTestsuites()`.
 
-#### getTestsuites()
+#### `.getTestsuites()`
 
-Retuns the testsuites root node.
+Returns the `Testsuites` root node.
 
-#### addTestsuite(name)
+#### `.addTestsuite(name)`
 
-Adds and retuns a testsuite node inside the testsuites root node.
+Adds and returns a testsuite node inside the testsuites root node.
 
-#### save(destination, callback)
+#### `.save(destination, callback)`
 
 This function saves the content of the report to a file at the given
 `destination`.
 
-### Testsuites
+### `Testsuites`
 
-#### addTestsuite(name)
+#### `.addTestsuite(name)`
 
-Adds and retuns a testsuite node inside the testsuites root node.
+Adds and returns a `Testsuite` node inside the `Testsuites` root node.
 
-#### incDisabled(amount)
+#### `.incDisabled(amount)`
 
-#### incErrors(amount)
+Increases the disabled test count by the given amount.
 
-#### incFailures(amount)
+#### `.incErrors(amount)`
 
-#### incTests(amount)
+Increases the error count by the given amount.
 
-#### setTime(seconds)
+#### `.incFailures(amount)`
 
-#### setName(name)
+Increases the failure count by the given amount.
 
-#### setSystemOut(out)
+#### `.incTests(amount)`
 
-#### setSystemError(err)
+Increases the test count by the given amount.
 
-#### showIds()
+#### `.setTime(seconds)`
 
-#### hideIds()
+Sets the total execution time in seconds.
 
-### Testsuite
+#### `.setName(name)`
 
-Testsuite can appear multiple times as a child element of testsuites.
+Sets the name attribute.
 
-#### addTestcase(name, classname)
+#### `.setSystemOut(out)`
 
-#### incDisabled(amount)
+Sets the system-out element with the given output.
 
-#### incErrors(amount)
+#### `.setSystemError(err)`
 
-#### incFailures(amount)
+Sets the system-err element with the given error output.
 
-#### incTests(amount)
+#### `.showIds()`
 
-#### setTime(seconds)
+Shows id attributes on all testsuites.
 
-#### setTimestamp(timestamp)
+#### `.hideIds()`
 
-#### setName(name)
+Hides id attributes on all testsuites.
 
-#### setSystemOut(out)
+### `Testsuite`
 
-#### setSystemError(err)
+Testsuite can appear multiple times as a child element of `Testsuites`.
 
-#### setHostname(hostname)
+#### `.addTestcase(name, classname)`
 
-#### setPackage(package)
+Adds and returns a `Testcase` node with the given name and classname.
 
-#### setSkipped(skipped)
+#### `.incDisabled(amount)`
 
-#### isSkipped()
+Increases the disabled test count by the given amount.
 
-#### showId()
+#### `.incErrors(amount)`
 
-#### hideId()
+Increases the error count by the given amount.
 
-#### addProperty(name, value)
+#### `.incFailures(amount)`
 
-#### removeProperty(name)
+Increases the failure count by the given amount.
 
-#### updateProperty(name, value)
+#### `.incTests(amount)`
 
-#### addError(message, type)
+Increases the test count by the given amount.
 
-#### addFailure(message, type)
+#### `.setTime(seconds)`
 
-### Testcase
+Sets the execution time in seconds.
 
-#### setName(name)
+#### `.setTimestamp(timestamp)`
 
-#### setClassname(classname)
+Sets the timestamp attribute with a Date object.
 
-#### setAssertions(assertions)
+#### `.setName(name)`
 
-#### setTime(seconds)
+Sets the name attribute.
+
+#### `.setSystemOut(out)`
+
+Sets the system-out element with the given output.
+
+#### `.setSystemError(err)`
+
+Sets the system-err element with the given error output.
+
+#### `.setHostname(hostname)`
+
+Sets the hostname attribute.
+
+#### `.setPackage(package)`
+
+Sets the package attribute.
+
+#### `.setSkipped(skipped)`
+
+Marks the testsuite as skipped when true, unmarks when false.
+
+#### `.isSkipped()`
+
+Returns whether the testsuite is marked as skipped.
+
+#### `.showId()`
+
+Shows the id attribute.
+
+#### `.hideId()`
+
+Hides the id attribute.
+
+#### `.addProperty(name, value)`
+
+Adds a property with the given name and value.
+
+#### `.removeProperty(name)`
+
+Removes the property with the given name.
+
+#### `.updateProperty(name, value)`
+
+Updates the property value for the given name.
+
+#### `.addError(message, type)`
+
+Adds an error notification with the given message and type.
+
+#### `.addFailure(message, type)`
+
+Adds a failure notification with the given message and type.
+
+### `Testcase`
+
+Testcase can appear multiple times as a child element of a `Testsuite`.
+
+#### `.setName(name)`
+
+Sets the name attribute.
+
+#### `.setClassname(classname)`
+
+Sets the classname attribute.
+
+#### `.setAssertions(assertions)`
+
+Sets the number of assertions.
+
+#### `.setTime(seconds)`
+
+Sets the execution time in seconds.
 
 ## License
 
