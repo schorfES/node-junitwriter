@@ -40,6 +40,6 @@
     "grunt-contrib-jshint": "^3.2.0",
     "grunt-contrib-nodeunit": "^5.0.0",
     "grunt-jscs": "^3.0.1",
-    "grunt-lintspaces": "^0.8.4"
+    "grunt-lintspaces": "^0.12.0"
   }
 }
