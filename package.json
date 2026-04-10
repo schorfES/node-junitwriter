@@ -4,7 +4,7 @@
   "description": "A junit reporter for node",
   "main": "index.js",
   "engines": {
-    "node": ">=5"
+    "node": ">=16"
   },
   "scripts": {
     "test": "grunt validate test"
