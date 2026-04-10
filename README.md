@@ -2,7 +2,7 @@
 
 A junit reporter for node.
 
-[![Travis Status](https://travis-ci.org/schorfES/node-junitwriter.png?branch=master)](https://travis-ci.org/schorfES/node-junitwriter)
+[![CI Status](https://github.com/schorfES/node-junitwriter/actions/workflows/ci.yml/badge.svg)](https://github.com/schorfES/node-junitwriter/actions)
 
 ## Installation
 
